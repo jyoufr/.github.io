@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CV - PDF</title>
+    <style>
+        /* Supprime les marges et occupe tout l'écran */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+        embed {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Balise embed sans src fixe, celui-ci sera défini dynamiquement par JavaScript -->
+    <embed id="pdfViewer" type="application/pdf" />
+
+    <script>
+        (function() {
+            // Récupère la langue principale du navigateur (ex: "en-US", "fr-FR", "en-GB")
+            const lang = (navigator.languages && navigator.languages[0]) 
+                          || navigator.language 
+                          || navigator.userLanguage 
+                          || 'fr'; // fallback sur français si indétectable
+
+            const viewer = document.getElementById('pdfViewer');
+
+            // Si la langue détectée commence par "en", on charge la version anglaise
+            if (lang.toLowerCase().startsWith('en')) {
+                viewer.src = 'cvjy_english.pdf';
+            } else {
+                viewer.src = 'cvjy.pdf';
+            }
+        })();
+    </script>
+</body>
+</html>
